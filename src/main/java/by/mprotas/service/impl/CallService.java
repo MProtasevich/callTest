@@ -7,6 +7,8 @@ import by.mprotas.service.ICallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+
 @Service
 public class CallService implements ICallService {
     @Autowired
@@ -18,6 +20,7 @@ public class CallService implements ICallService {
     @Override
     public boolean saveCall(Call call) {
         call.setPhone(phoneExtractor.extractPhone(call.getPhone()));
+        call.setTime(LocalTime.now());
         return callDao.saveCall(call);
     }
 }

@@ -12,6 +12,9 @@ public class BalancedParenthesesValidator implements ConstraintValidator<Balance
 
     @Override
     public boolean isValid(String stringWithParentheses, ConstraintValidatorContext constraintValidatorContext) {
+        if (stringWithParentheses == null) {
+            return true;
+        }
         int countOfOpenedButNotClosedParentheses = 0;
 
         for (char c : stringWithParentheses.toCharArray()) {

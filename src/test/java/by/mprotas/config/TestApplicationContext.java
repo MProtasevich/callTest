@@ -3,11 +3,9 @@ package by.mprotas.config;
 import by.mprotas.extractor.IPhoneExtractor;
 import by.mprotas.extractor.impl.PhoneExtractor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.regex.Pattern;
 
-@Configuration
 public class TestApplicationContext {
     @Bean
     public Pattern phoneRedundantPartsPattern() {

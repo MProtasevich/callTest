@@ -14,7 +14,7 @@ public class CallDao implements ICallDao {
 
     @Override
     public boolean saveCall(Call call) {
-        File file = new File(getFileName("./", call.getFirstName(), call.getLastName()));
+        File file = new File(getFileName("../temp/", call.getFirstName(), call.getLastName()));
         try (PrintWriter pw = new PrintWriter(file)) {
             pw.println(call.getPhone());
             pw.println(call.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
@@ -26,7 +26,7 @@ public class CallDao implements ICallDao {
     }
 
     private String getFileName(String path, String firstName, String lastName) {
-        return path + lastName.toUpperCase() + (isEmpty(firstName) ? "" : "_" + firstName.toUpperCase());
+        return path + lastName.toUpperCase() + (isEmpty(firstName) ? "" : "_" + firstName.toUpperCase()) + ".txt";
     }
 
     private boolean isEmpty(String string) {

@@ -4,22 +4,17 @@ import by.mprotas.validator.annotation.Phone;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Arrays;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PhoneValidator implements ConstraintValidator<Phone, String> {
     private Pattern redundantSymbolsPattern;
     private Pattern prefixPattern;
-    private char[] availableSymbols;
     private int numberOfAreaCodeDigits;
     private int numberOfLocalCodeDigits;
 
     @Override
     public void initialize(Phone phone) {
         prefixPattern = Pattern.compile(phone.prefixPattern());
-        availableSymbols = phone.availableSymbols().toCharArray();
-        Arrays.sort(availableSymbols);
         numberOfAreaCodeDigits = phone.numberOfAreaCodeDigits();
         numberOfLocalCodeDigits = phone.numberOfLocalCodeDigits();
 
@@ -30,11 +25,11 @@ public class PhoneValidator implements ConstraintValidator<Phone, String> {
 
     @Override
     public boolean isValid(String phone, ConstraintValidatorContext constraintValidatorContext) {
-        Matcher prefixMatcher = prefixPattern.matcher(phone);
-        if (!prefixMatcher.matches()) {
-            return false;
+        if (phone == null) {
+            return true;
         }
-        String prefixlessPhone = prefixMatcher.replaceFirst("");
+
+        String prefixlessPhone = prefixPattern.matcher(phone).replaceFirst("");
         String prefixlessFormattedPhone = redundantSymbolsPattern.matcher(prefixlessPhone).replaceAll("");
 
         int countOfAreaCodeDigits = 0;

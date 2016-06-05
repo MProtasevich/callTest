@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BalancedParentheses {
-    String message() default "{Phone}";
+    String message() default "{parentheses.are.not.balanced}";
 
     Class<?>[] groups() default {};
 

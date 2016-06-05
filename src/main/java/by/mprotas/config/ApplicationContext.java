@@ -16,4 +16,9 @@ public class ApplicationContext {
     public Pattern phoneRedundantPartsPattern() {
         return Pattern.compile(" \\-\\+\\(\\)");
     }
+
+    @Bean
+    public Pattern prefixPattern() {
+        return Pattern.compile("^(\\+|00)");
+    }
 }

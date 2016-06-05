@@ -14,10 +14,10 @@ public class CallDao implements ICallDao {
 
     @Override
     public boolean saveCall(Call call) {
-        File file = new File(getFileName("./", call));
+        File file = new File(getFileName("./", call.getFirstName(), call.getLastName()));
         try (PrintWriter pw = new PrintWriter(file)) {
-            pw.println(call.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
             pw.println(call.getPhone());
+            pw.println(call.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
         } catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
             return false;
@@ -25,7 +25,11 @@ public class CallDao implements ICallDao {
         return true;
     }
 
-    private String getFileName(String path, Call call) {
-        return path + call.getLastName() + (call.getFirstName() == null ? "" : call.getFirstName());
+    private String getFileName(String path, String firstName, String lastName) {
+        return path + lastName.toUpperCase() + (isEmpty(firstName) ? "" : "_" + firstName.toUpperCase());
+    }
+
+    private boolean isEmpty(String string) {
+        return string == null || "".equals(string);
     }
 }

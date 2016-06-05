@@ -1,9 +1,9 @@
 package by.mprotas.dto;
 
+import by.mprotas.validator.annotation.BalancedParentheses;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Null;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalTime;
 
@@ -19,7 +19,8 @@ public class Call {
     private LocalTime time;
 
     @NotEmpty
-    @Pattern(regexp = "(?:\\+|00)?(\\(?\\d{1,3}\\)?)?[ -]?((?:[ \\-\\(]?\\d{3}[ \\-\\)]?){3})")
+//    @Pattern(regexp = "(?:\\+|00)?(\\(?\\d{1,3}\\)?)?[ -]?((?:[ \\-\\(]?\\d{3}[ \\-\\)]?){3})")
+    @BalancedParentheses
     private String phone;
 
     public String getFirstName() {

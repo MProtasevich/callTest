@@ -17,6 +17,12 @@ public class CallService implements ICallService {
     @Autowired
     private IPhoneExtractor phoneExtractor;
 
+    /**
+     * Formats {@link Call phone} field according to {@link IPhoneExtractor} implementation,
+     * sets current time to {@link Call time} field and saves the {@link Call} via {@link ICallDao}
+     * @param call {@link Call} object to save.
+     * @return true if {@link Call} was saved without errors.
+     */
     @Override
     public boolean saveCall(Call call) {
         call.setPhone(phoneExtractor.extractPhone(call.getPhone()));

@@ -22,6 +22,12 @@ public class PhoneExtractor implements IPhoneExtractor {
     @Autowired
     private Pattern phoneFormatPattern;
 
+    /**
+     * Extracts phone to format 00YYY XXX XXX XXX, where YYY - area code and XXX XXX XXX - local part.
+     * @param phone {@link String} which contains phone with some other symbols.
+     * @return the {@link String} with phone in 00YYY XXX XXX XXX format.
+     */
+    @Override
     public String extractPhone(String phone) {
         String prefixlessPhone = prefixPattern.matcher(phone).replaceAll("");
         String contextFreePhone = phoneRedundantPartsPattern.matcher(prefixlessPhone).replaceAll("");

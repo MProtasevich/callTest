@@ -1,11 +1,15 @@
 package by.mprotas.config;
 
+import by.mprotas.dao.ICallDao;
+import by.mprotas.dao.impl.CallDao;
 import by.mprotas.extractor.IPhoneExtractor;
 import by.mprotas.extractor.impl.PhoneExtractor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.regex.Pattern;
 
+@Configuration
 public class TestApplicationContext {
     @Bean
     public Pattern phoneRedundantPartsPattern() {
@@ -25,5 +29,10 @@ public class TestApplicationContext {
     @Bean
     public IPhoneExtractor phoneExtractor() {
         return new PhoneExtractor();
+    }
+
+    @Bean
+    public ICallDao callDao() {
+        return new CallDao();
     }
 }

@@ -5,6 +5,9 @@ import by.mprotas.validator.annotation.BalancedParentheses;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * Checks parentheses balance in specified {@link String}
+ */
 public class BalancedParenthesesValidator implements ConstraintValidator<BalancedParentheses, String> {
     @Override
     public void initialize(BalancedParentheses parenthesesBalanced) {

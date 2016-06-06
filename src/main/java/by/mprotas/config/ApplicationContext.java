@@ -3,12 +3,9 @@ package by.mprotas.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import javax.validation.ValidatorFactory;
 import java.util.regex.Pattern;
 
 @Configuration
@@ -35,18 +32,8 @@ public class ApplicationContext {
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource resourceBundle = new ReloadableResourceBundleMessageSource();
         resourceBundle.setBasename("classpath:messages");
+        resourceBundle.setFallbackToSystemLocale(true);
+        resourceBundle.setDefaultEncoding("UTF-8");
         return resourceBundle;
-    }
-
-    @Bean
-    public ValidatorFactory validatorFactory() {
-        LocalValidatorFactoryBean validatorFactory = new LocalValidatorFactoryBean();
-        validatorFactory.setValidationMessageSource(messageSource());
-        return validatorFactory;
-    }
-
-    @Bean
-    public MessageSourceAccessor messageSourceAccessor() {
-        return new MessageSourceAccessor(messageSource());
     }
 }

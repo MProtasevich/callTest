@@ -9,9 +9,22 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Saves provided {@link Call} object in file system.
+ * File will be named in uppercase with {@link Call}'s
+ * {@link Call firstName} and {@link Call lastName} fields
+ * in format LASTNAME_FIRSTNAME.txt
+ */
 @Component
 public class CallDao implements ICallDao {
 
+    /**
+     * Tries to save the {@link Call} object and returns the flag
+     * which indicates if it was saved without errors.
+     *
+     * @param call object to save in FS.
+     * @return the result of saving. True if file was saved.
+     */
     @Override
     public boolean saveCall(Call call) {
         File file = new File(getFileName("../temp/", call.getFirstName(), call.getLastName()));
